@@ -1,0 +1,49 @@
+## bencode
+
+Nim bencode library
+
+image:https://circleci.com/gh/FedericoCeratto/nim-bencode.svg?style=svg["CircleCI", link="https://circleci.com/gh/FedericoCeratto/nim-bencode"]
+image:https://img.shields.io/badge/status-alpha-orange.svg[badge]
+image:https://img.shields.io/badge/version-0.1.0-orange.svg[badge]
+
+* Encode from JSON objects
+* Basic unit tests
+* Tested on Linux
+
+### Installation
+
+[source,bash]
+----
+nimble install bencode
+----
+
+### Usage
+
+[source,nim]
+----
+import bencode
+import tables, json
+
+let decoded = bdecode("d3:bar4:spam3:fooi42ee") # returns BENode
+
+# pretty print
+pprint decoded
+
+# encode
+assert bencode(33) == "i33e"
+assert bencode("foo") == "3:foo"
+assert bencode({"bar": "spam", "foo": "42"}.toTable) == "d3:bar4:spam3:foo2:42e"
+
+# encode from JSON
+let j = %* {
+  "t":"aa", "y":"q", "q":"ping", "a": {
+    "id":"abcdefghij0123456789"
+  }
+}
+let encoded = j.bencode()
+
+----
+
+### Contributing
+
+Testing and PRs are welcome.
