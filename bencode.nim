@@ -26,7 +26,7 @@ type
     tkDict
 
   BENode* = object
-    case kind: BENodeKind
+    case kind*: BENodeKind
     of tkInt: intVal*: int
     of tkBytes: strVal*: string
     of tkList: listVal*: seq[BENode]
